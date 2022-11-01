@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 #
 # Copyright (C) 2020 Rockchip Electronics Co., Ltd
 #
@@ -30,7 +30,7 @@ def unpack_elf(filename):
         if p_type == 1: # PT_LOAD
             p_paddr, p_filesz = struct.unpack_from('<2Q', elf, offset + 0x18)
             if p_filesz > 0:
-                p_data = elf[p_offset:p_offset + p_filesz]
+                p_data = elf[p_offset : p_offset + p_filesz]
                 segments.append((index, e_entry, p_paddr, p_data))
     return segments
 
@@ -42,7 +42,7 @@ def generate_atf_binary(bl31_file_name):
 
 def main():
     bl31_elf="./bl31.elf"
-    generate_atf_binary(bl31_elf);
+    generate_atf_binary(bl31_elf)
 
 if __name__ == "__main__":
     main()
