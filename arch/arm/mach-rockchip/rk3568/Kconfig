@@ -6,6 +6,12 @@ config TARGET_EVB_RK3568
 	help
 	  RK3568 EVB is a evaluation board for Rockchp RK3568.
 
+config TARGET_QUARTZ64_RK3566
+	bool "QUARTZ64_RK3566"
+	select BOARD_LATE_INIT
+	help
+	  The quartz64-rk3566 is a single board computer from pine64.
+
 config SYS_SOC
 	default "rockchip"
 
@@ -13,5 +19,6 @@ config SYS_MALLOC_F_LEN
 	default 0x400
 
 source board/rockchip/evb_rk3568/Kconfig
+source board/pine64/quartz64_rk3566/Kconfig
 
 endif
