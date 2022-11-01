@@ -25,15 +25,11 @@ static int rkusb_read_sector(struct ums *ums_dev,
 	lbaint_t blkstart = start + ums_dev->start_sector;
 	int ret;
 
-	if ((blkstart + blkcnt) > RKUSB_READ_LIMIT_ADDR) {
-		memset(buf, 0xcc, blkcnt * SECTOR_SIZE);
-		return blkcnt;
-	} else {
-		ret = blk_dread(block_dev, blkstart, blkcnt, buf);
-		if (!ret)
-			ret = -EIO;
-		return ret;
-	}
+
+	ret = blk_dread(block_dev, blkstart, blkcnt, buf);
+	if (!ret)
+		ret = -EIO;
+	return ret;
 }
 
 static int rkusb_write_sector(struct ums *ums_dev,
