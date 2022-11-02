@@ -9,6 +9,8 @@
 
 #include <configs/rk3568_common.h>
 
+#define CONFIG_SYS_SPI_U_BOOT_OFFS	(128 << 10)
+
 #ifndef CONFIG_SPL_BUILD
 
 #undef ROCKCHIP_DEVICE_SETTINGS
