@@ -768,6 +768,7 @@ sub_commands
 clean_files
 make PYTHON=python3 CROSS_COMPILE=${TOOLCHAIN} all --jobs=${JOB}
 pack_images
+pack_idblock
 finish
 echo ${TOOLCHAIN}
 date
