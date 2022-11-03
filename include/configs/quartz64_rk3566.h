@@ -15,13 +15,20 @@
 
 #undef ROCKCHIP_DEVICE_SETTINGS
 #define ROCKCHIP_DEVICE_SETTINGS \
-		"stdout=serial,vidconsole\0" \
-		"stderr=serial,vidconsole\0"
+		"stdout=serial,vidconsole\0"	\
+		"stderr=serial,vidconsole\0"	\
+		"distro_bootpart=4\0"		\
 
+#ifndef CONFIG_SYS_MMC_ENV_DEV
 #define CONFIG_SYS_MMC_ENV_DEV		0
+#endif
 
 #undef CONFIG_BOOTCOMMAND
-#define CONFIG_BOOTCOMMAND RKIMG_BOOTCOMMAND
+#define CONFIG_BOOTCOMMAND 	\
+	"boot_fit;"		\
+	"bootrkp;"		\
+	"run distro_bootcmd;"
+
 
 #define CONFIG_SET_DFU_ALT_INFO
 #define DFU_ALT_BOOT_EMMC \
