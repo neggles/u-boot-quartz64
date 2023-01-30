@@ -1,0 +1,83 @@
+/*
+ * SPDX-License-Identifier:     GPL-2.0+
+ *
+ * (C) Copyright 2020 Rockchip Electronics Co., Ltd
+ */
+
+/dts-v1/;
+#include "rk3568.dtsi"
+#include "rk3566-u-boot.dtsi"
+#include <dt-bindings/input/input.h>
+
+/ {
+	model = "PINE64 Pinetab2";
+	compatible = "rockchip,rk3566-pinetab2", "rockchip,rk3566";
+
+	config {
+		u-boot,spl-payload-offset = <0x80000>;	/* @ 512KB */
+		u-boot,mmc-env-partition = "uboot";	/* @ if mmcboot */
+	};
+
+	chosen {
+		u-boot,spl-boot-order = \
+			"same-as-spl", &spi_nor, &sdmmc0, &sdhci;
+	};
+
+};
+
+&spi_nor {
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		partition@8000 {
+			label = "idbloader";
+			reg = <0x8000 0x378000>;
+			read-only;
+		};
+
+		partition@380000 {
+			label = "vnvm";
+			reg = <0x380000 0x40000>;
+			read-only;
+		};
+
+		partition@3c0000 {
+			label = "reserved_space";
+			reg = <0x3c0000 0x30000>;
+		};
+
+		partition@3f0000 {
+			label = "reserved1";
+			reg = <0x3f0000 0x8000>;
+		};
+
+		partition@3f8000 {
+			label = "uboot_env";
+			reg = <0x3f8000 0x8000>;
+		};
+
+		partition@400000 {
+			label = "reserved2";
+			reg = <0x400000 0x400000>;
+		};
+
+		partition@800000 {
+			label = "uboot";
+			reg = <0x800000 0x7fbe00>;
+		};
+	};
+};
+
+&crypto {
+	status = "okay";
+};
+
+&uart0 {
+	status = "okay";
+};
+
+&uart2 {
+	status = "okay";
+};
